@@ -83,7 +83,7 @@ module EbDeployer
     end
 
     def create_stack(template, params, capabilities, policy, tags)
-      opts = {:disable_rollback => true, :capabilities => capabilities, :parameters => params, :tags = tags}
+      opts = {:disable_rollback => true, :capabilities => capabilities, :parameters => params, :tags => tags}
       opts[:stack_policy_body] = policy if policy
       log("Applying stack policy to new resource stack") if policy
       @cf_driver.create_stack(@stack_name, template, opts)
