@@ -4,13 +4,13 @@ module EbDeployer
       @resources = resources
       @cf_driver = cf_driver
       @skip_provision = skip_provision
-      @tags = tags
+      @tags = tags.to_h
     end
 
     def provision(stack_name)
       provisioner = CloudFormationProvisioner.new(stack_name, @cf_driver)
       if @resources
-        provisioner.provision(@resources, @tags) unless @skip_provision
+        erovisioner.provision(@resources, @tags) unless @skip_provision
         provisioner.transform_outputs(@resources)
       else
         []
