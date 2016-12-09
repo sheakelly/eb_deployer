@@ -10,7 +10,7 @@ module EbDeployer
     def provision(stack_name)
       provisioner = CloudFormationProvisioner.new(stack_name, @cf_driver)
       if @resources
-        puts "using tags #{tags}"
+        puts "using tags #{@tags}"
         provisioner.provision(@resources, @tags) unless @skip_provision
         provisioner.transform_outputs(@resources)
       else
