@@ -4,13 +4,14 @@ module EbDeployer
       @resources = resources
       @cf_driver = cf_driver
       @skip_provision = skip_provision
-      @tags = tags.to_h
+      puts "before tags: #{tags}"
+      @tags = tags.map{ |row| {key: row[0], value: row[1]} }
+      puts "using tags #{@tags}"
     end
 
     def provision(stack_name)
       provisioner = CloudFormationProvisioner.new(stack_name, @cf_driver)
       if @resources
-        puts "using tags #{@tags}"
         provisioner.provision(@resources, @tags) unless @skip_provision
         provisioner.transform_outputs(@resources)
       else
