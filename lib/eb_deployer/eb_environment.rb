@@ -29,8 +29,8 @@ module EbDeployer
         create_eb_env(settings, version_label)
       end
 
-      smoke_test
       wait_for_env_become_healthy
+      smoke_test
     end
 
     def apply_settings(settings)
